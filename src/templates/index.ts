@@ -7,22 +7,27 @@ export interface TemplateMeta {
   label: string;
   /** One-line description of the look */
   description: string;
+  /** Route this template is served at (each template is its own static page) */
+  path: string;
   Component: ComponentType;
 }
 
 /**
- * Registry of available résumé layouts. Add a new entry here to make a
- * new template selectable via `?template=<id>`.
+ * Registry of available résumé layouts. Each template is a standalone static
+ * route so the content is server-rendered into the HTML (works without JS).
+ * Add a new entry here plus a matching `src/app/<path>/page.tsx`.
  */
 export const TEMPLATES = {
   "french-vanilla": {
     label: "French Vanilla",
     description: "Styled cards, badges, and mono accents",
+    path: "/",
     Component: FrenchVanilla,
   },
   vanilla: {
     label: "Vanilla",
     description: "Clean single column, matches the Word document",
+    path: "/vanilla",
     Component: Vanilla,
   },
 } satisfies Record<string, TemplateMeta>;
@@ -30,11 +35,3 @@ export const TEMPLATES = {
 export type TemplateId = keyof typeof TEMPLATES;
 
 export const DEFAULT_TEMPLATE: TemplateId = "french-vanilla";
-
-export function isTemplateId(value: unknown): value is TemplateId {
-  return typeof value === "string" && value in TEMPLATES;
-}
-
-export function resolveTemplate(value: unknown): TemplateId {
-  return isTemplateId(value) ? value : DEFAULT_TEMPLATE;
-}

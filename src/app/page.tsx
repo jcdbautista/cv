@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { RESUME_DATA } from "@/data/resume-data";
-import { generateResumeStructuredData } from "@/lib/structured-data";
-import { ResumeView } from "@/templates/resume-view";
+import { ResumeShell } from "@/templates/resume-shell";
 
 export const metadata: Metadata = {
   title: `${RESUME_DATA.name} - Resume`,
@@ -21,24 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function ResumePage() {
-  const structuredData = generateResumeStructuredData();
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: Safe for JSON-LD structured data
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
-        }}
-      />
-      <div className="sr-only">
-        <h1>{RESUME_DATA.name}&apos;s Resume</h1>
-      </div>
-
-      <Suspense>
-        <ResumeView />
-      </Suspense>
-    </>
-  );
+  return <ResumeShell active="french-vanilla" />;
 }

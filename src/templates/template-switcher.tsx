@@ -6,8 +6,8 @@ interface TemplateSwitcherProps {
 }
 
 /**
- * Small, print-hidden control for switching résumé layouts.
- * Each option is a plain link to `?template=<id>` so state lives in the URL.
+ * Print-hidden control for switching résumé layouts. Each option links to
+ * that template's own static route, so navigation works without client JS.
  */
 export function TemplateSwitcher({ active }: TemplateSwitcherProps) {
   const ids = Object.keys(TEMPLATES) as TemplateId[];
@@ -22,8 +22,7 @@ export function TemplateSwitcher({ active }: TemplateSwitcherProps) {
         return (
           <Link
             key={id}
-            href={`/?template=${id}`}
-            scroll={false}
+            href={TEMPLATES[id].path}
             title={TEMPLATES[id].description}
             aria-current={isActive ? "page" : undefined}
             className={

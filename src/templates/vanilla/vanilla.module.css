@@ -1,0 +1,162 @@
+/*
+ * Vanilla — a faithful web reproduction of the source Word document.
+ * All metrics are lifted directly from the .docx (Arial, US Letter,
+ * 0.65in side margins, the type scale and paragraph spacing below).
+ */
+
+.page {
+  background: #d9d9d9;
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.sheet {
+  --ink: #000000;
+  --rule: #b7b7b7;
+  --link: #1155cc;
+
+  box-sizing: border-box;
+  width: 8.5in;
+  max-width: 100%;
+  padding: 0.58in 0.65in 0.55in;
+  background: #ffffff;
+  color: var(--ink);
+  font-family: Arial, Helvetica, "Liberation Sans", "Nimbus Sans", sans-serif;
+  font-size: 10pt;
+  line-height: 1.15;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.18);
+}
+
+/* ---- Header ---- */
+.name {
+  margin: 0 0 3pt;
+  font-size: 22pt;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0 0 3pt;
+  font-size: 10.5pt;
+  text-align: center;
+}
+
+.contact {
+  margin: 0 0 1.5pt;
+  font-size: 9pt;
+  text-align: center;
+}
+
+.contactLast {
+  margin-bottom: 7pt;
+}
+
+.contact a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+/* ---- Sections ---- */
+.section {
+  margin-top: 7pt;
+}
+
+.heading {
+  margin: 7pt 0 4pt;
+  padding-bottom: 1.5pt;
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 0.75pt solid var(--rule);
+}
+
+.summary {
+  margin: 0;
+}
+
+/* ---- Core Expertise ---- */
+.skillLine {
+  margin: 0 0 2.8pt;
+  line-height: 1.05;
+}
+
+.skillLabel {
+  font-weight: 700;
+}
+
+/* ---- Entry header (company / role / date) ---- */
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+  margin: 0;
+}
+
+.company {
+  font-weight: 700;
+}
+
+.role {
+  font-style: italic;
+}
+
+.date {
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ---- Bullets ---- */
+.bullets {
+  margin: 2pt 0 6pt;
+  padding-left: 0.28in;
+  list-style: disc;
+}
+
+.bullets li {
+  margin: 0 0 2.2pt;
+  line-height: 1.08;
+}
+
+/* Additional experience, certifications, and education render at 9.5pt */
+.small {
+  font-size: 9.5pt;
+}
+
+.certRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+  margin: 0 0 2pt;
+  font-size: 9.5pt;
+}
+
+.eduRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+  margin: 0 0 2pt;
+  font-size: 9.5pt;
+}
+
+@media print {
+  .page {
+    background: #ffffff;
+    min-height: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .sheet {
+    width: auto;
+    max-width: none;
+    box-shadow: none;
+    /* @page owns the physical margins in print; the sheet supplies none */
+    padding: 0;
+  }
+}
